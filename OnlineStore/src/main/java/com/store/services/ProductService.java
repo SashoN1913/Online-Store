@@ -11,7 +11,7 @@ import com.store.models.Product;
 public class ProductService {
 	
 	private List<Product> products = Arrays.asList(
-			new Product(1, "TV", 100, 1021.23),
+			new Product(1, "TV", 100000, 1021.23),
 			new Product(2, "PC", 10, 1021.23),
 			new Product(3, "ATV", 14, 1021.23),
 			new Product(4, "APC", 56, 1021.23)
@@ -20,6 +20,17 @@ public class ProductService {
 	
 	public List<Product> getProducts() {
 		return products;
+	}
+	
+	public Product getProduct(int id) {
+		return products.stream()
+                .filter(p -> p.getId() == id)
+                .findFirst()
+                .orElse(null); // Object not found
+	}
+	
+	public void addProduct(Product p) {
+		products.add(p); 
 	}
 
 	

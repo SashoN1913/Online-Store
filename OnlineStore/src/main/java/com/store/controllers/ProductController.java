@@ -15,20 +15,14 @@ import com.store.services.ProductService;
 @Controller
 public class ProductController {
 	
-	//@Autowired
-	//private ProductService productService;
+	@Autowired
+	private ProductService productService;
 	
 	@RequestMapping("/")
 	public String getProdusts(Model model)
 	{
-		List<Product> products = Arrays.asList(
-				new Product(1, "TV", 100, 1021.23),
-				new Product(2, "PC", 10, 1021.23),
-				new Product(3, "ATV", 14, 1021.23),
-				new Product(4, "APC", 56, 1021.23)
-				);
 		
-		model.addAttribute("products", products);
+		model.addAttribute("products", productService.getProducts());
 		
 		return "index.html";
 	}
