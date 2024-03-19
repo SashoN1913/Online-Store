@@ -1,17 +1,25 @@
 package com.store.models;
 
-public class Product {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+public class Product
+{
+	@Id
 	private int id;
 	private String title;
 	private int stock;
 	private double price;
 	
 
-	public Product(){
+	public Product()
+	{
 	}
 
 
-	public Product(int id, String title, int stock, double price) {
+	public Product(int id, String title, int stock, double price)
+	{
 		super();
 		this.id = id;
 		this.title = title;
@@ -20,47 +28,56 @@ public class Product {
 	}
 
 
-	public int getId() {
+	public int getId()
+	{
 		return id;
 	}
 
 
-	public void setId(int id) {
+	public void setId(int id)
+	{
 		this.id = id;
 	}
 
 
-	public String getTitle() {
+	public String getTitle()
+	{
 		return title;
 	}
 
 
-	public void setTitle(String title) {
+	public void setTitle(String title)
+	{
 		this.title = title;
 	}
 
 
-	public int getStock() {
+	public int getStock()
+	{
 		return stock;
 	}
 
 
-	public void setStock(int stock) {
+	public void setStock(int stock)
+	{
 		this.stock = stock;
 	}
 
 
-	public double getPrice() {
+	public double getPrice()
+	{
 		return price;
 	}
 
 
-	public void setPrice(double price) {
+	public void setPrice(double price)
+	{
 		this.price = price;
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "Product [id=" + id + ", title=" + title + ", stock=" + stock + ", price=" + price + "]";
 	}
 	

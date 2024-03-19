@@ -21,11 +21,8 @@ public class ProductController {
 	@RequestMapping("/")
 	public String getProdusts(Model model)
 	{
-		
 		model.addAttribute("products", productService.getProducts());
 		
 		return "index.html";
 	}
-	
-
 }
