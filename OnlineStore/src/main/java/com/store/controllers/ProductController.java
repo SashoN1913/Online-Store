@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -20,7 +21,6 @@ public class ProductController {
 	@GetMapping("/products")
 	public String getProdusts(Model model)
 	{
-		System.out.println(productService.getProducts());
 		model.addAttribute("products", productService.getProducts());
 		
 		return "index.html";
@@ -35,8 +35,10 @@ public class ProductController {
 	}
 	
 	@PostMapping("/addNew")
-	public String addNew(@Valid Product p, BindingResult bindingResult, Model model)
+	public String addNew(@Validated Product product, BindingResult bindingResult, Model model)
 	{
+		productService.addProduct(product);
+		model.addAttribute("products", productService.getProducts());
 		return "index.html";
 	}
 }
