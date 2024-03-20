@@ -1,17 +1,20 @@
 package com.store.models;
 
-public class User {
+public class User
+{
 	private String firstName;
 	private String lastName;
 	private String phone;
 	private String email;
 	private String password;
-	
-	public User() {
+
+	public User()
+	{
 		super();
 	}
-	
-	public User(String firstName, String lastName, String phone, String email, String password) {
+
+	public User(String firstName, String lastName, String phone, String email, String password)
+	{
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -19,43 +22,62 @@ public class User {
 		this.email = email;
 		this.password = password;
 	}
-	public String getFirstName() {
+
+	public String getFirstName()
+	{
 		return firstName;
 	}
-	public void setFirstName(String firstName) {
+
+	public void setFirstName(String firstName)
+	{
 		this.firstName = firstName;
 	}
-	public String getLastName() {
+
+	public String getLastName()
+	{
 		return lastName;
 	}
-	public void setLastName(String lastName) {
+
+	public void setLastName(String lastName)
+	{
 		this.lastName = lastName;
 	}
-	public String getPhone() {
+
+	public String getPhone()
+	{
 		return phone;
 	}
-	public void setPhone(String phone) {
+
+	public void setPhone(String phone)
+	{
 		this.phone = phone;
 	}
-	public String getEmail() {
+
+	public String getEmail()
+	{
 		return email;
 	}
-	public void setEmail(String email) {
+
+	public void setEmail(String email)
+	{
 		this.email = email;
 	}
-	public String getPassword() {
+
+	public String getPassword()
+	{
 		return password;
 	}
-	public void setPassword(String password) {
+
+	public void setPassword(String password)
+	{
 		this.password = password;
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "User [firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone + ", email=" + email
 				+ ", password=" + password + "]";
 	}
-	
-	
-	
+
 }

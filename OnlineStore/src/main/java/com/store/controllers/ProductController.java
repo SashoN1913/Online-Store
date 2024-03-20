@@ -13,36 +13,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.store.models.Product;
 import com.store.services.ProductService;
 
-
 @Controller
-public class ProductController {
-	
+public class ProductController
+{
+
 	@Autowired
 	private ProductService productService;
-	
+
 	@GetMapping("/products")
 	public String getProdusts(Model model)
 	{
 		model.addAttribute("products", productService.getProducts());
-		
+
 		return "index.html";
 	}
-	
+
 	@GetMapping("/addProduct")
 	public String addProduct(Model model)
 	{
 		model.addAttribute("product", new Product());
-		
+
 		return "addProduct.html";
 	}
-	
+
 	@GetMapping("/productsAdmin")
 	public String admin(Model model)
 	{
 		model.addAttribute("products", productService.getProducts());
 		return "productsAdmin.html";
 	}
-	
+
 	@PostMapping("/addNew")
 	public String addNew(@Validated Product product, BindingResult bindingResult, Model model)
 	{
@@ -50,7 +50,7 @@ public class ProductController {
 		model.addAttribute("products", productService.getProducts());
 		return "index.html";
 	}
-	
+
 	@PostMapping("/editForm")
 	public String edit(@Validated Product product, BindingResult bindingResult, Model model)
 	{
@@ -58,7 +58,7 @@ public class ProductController {
 		model.addAttribute("product", productService.getProduct(product.getId()));
 		return "editProduct.html";
 	}
-	
+
 	@PostMapping("/update")
 	public String update(@Validated Product product, BindingResult bindingResult, Model model)
 	{
@@ -67,8 +67,7 @@ public class ProductController {
 		model.addAttribute("products", productService.getProducts());
 		return "productsAdmin.html";
 	}
-	
-	
+
 	@PostMapping("/delete")
 	public String delete(@Validated Product product, BindingResult bindingResult, Model model)
 	{
@@ -77,7 +76,7 @@ public class ProductController {
 		model.addAttribute("products", productService.getProducts());
 		return "productsAdmin.html";
 	}
-	
+
 //	@RequestMapping("/delete")
 //	public String deleteArticle(@RequestParam("id") int id)
 //	{
