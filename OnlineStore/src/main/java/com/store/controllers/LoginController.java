@@ -16,7 +16,6 @@ public class LoginController {
 	public String displayLoginForm(Model model) {
 		
 		model.addAttribute("loginModel", new LoginModel());
-		
 		return "loginForm.html";
 	}
 	
