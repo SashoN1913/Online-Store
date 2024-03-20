@@ -26,13 +26,20 @@ public class ProductService
 		return p.get();
 	}
 	
-	public void addProduct(Product p) {
+	public void addProduct(Product p)
+	{
 		productRepository.save(p);
 	}
 	
-	public void removeProduct(int id) {
+	public void removeProduct(int id)
+	{
 		productRepository.deleteById(id);
 	}
 
-	
+	public void updateProduct(int id, Product p)
+	{
+		p.setId(id);
+		addProduct(p);
+	}
+
 }

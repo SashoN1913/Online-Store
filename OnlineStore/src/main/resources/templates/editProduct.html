@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html layout:decorate="layouts/defaultLayout" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Online Store</title>
+
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<div layout:fragment="content">
+		<div class="container mt-3 mb-3">
+			<form th:action="@{/update}" action="#" method="post" th:object="${product}">
+				
+				<input name="id" type=hidden th:value="${product.id}">
+				
+				<div class="mb-3">
+					<label for="productTitleInput" class="form-label">Product Title</label>
+					<input th:field="*{title}" type="text" class="form-control" id="productTitleInput" aria-describedby="productTitleHelp">
+					<div id="productTitleHelp" class="form-text">Enter title of product</div>
+				</div>
+
+				<div class="mb-3">
+					<label for="productStockInput" class="form-label">Product stock</label>
+					<input th:field="*{stock}" type="text" class="form-control" id="productStockInput" aria-describedby="productStockHelp">
+					<div id="productStockHelp" class="form-text">Enter stock of product</div>
+				</div>
+
+				<div class="mb-3">
+					<label for="productPriceInput" class="form-label">Product price</label>
+					<input th:field="*{price}" type="text" class="form-control" id="productPriceInput" aria-describedby="productPriceHelp">
+					<div id="productPriceHelp" class="form-text">Enter product price</div>
+				</div>
+				<button type="submit" class="btn btn-primary">Update</button>
+				<a class="btn btn-danger" th:href="@{/productsAdmin}">Cancel</a>
+			</form>
+		</div>
+	</div>
+
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/scripts.js"></script>
+</body>
+
+</html>

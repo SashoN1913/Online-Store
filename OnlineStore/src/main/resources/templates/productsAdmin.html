@@ -1,68 +1,69 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Online Store</title>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="Source code generated using layoutit.com">
-    <meta name="author" content="LayoutIt!">
+	<title>Online Store</title>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
+	<meta name="description" content="Source code generated using layoutit.com">
+	<meta name="author" content="LayoutIt!">
 
-  </head>
-  <body>
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
 
-    <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<h3>
-				Products
-			</h3>
-			<table class="table table-hover table-striped">
-				<thead>
-					<tr>
-						<th>
-							id
-						</th>
-						<th>
-							Title
-						</th>
-						<th>
-							Stock
-						</th>
-						<th>
-							Price
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each = "p : ${products}">
-						<td th:text = "${p.id}">
-							1
-						</td>
-						<td th:text = "${p.title}">
-							-
-						</td>
-						<td th:text = "${p.stock}">
-							-
-						</td>
-						<td th:text = "${p.price}">
-							-
-						</td>
-					</tr>
-				</tbody>
-			</table>
+</head>
+
+<body>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<h3>
+					Products
+				</h3>
+				<table class="table table-hover table-striped">
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>Title</th>
+							<th>Stock</th>
+							<th>Price</th>
+							<th>Edit</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="p : ${products}">
+							<td th:text="${p.id}"></td>
+							<td th:text="${p.title}"></td>
+							<td th:text="${p.stock}"></td>
+							<td th:text="${p.price}"></td>
+							<td>
+								<form th:action="@{/editForm}" action="#" method="post" th:object="${p}">
+									<input name="id" type=hidden th:value="${p.id}">
+									<button class="btn btn-secondary" type="submit" name="editProduct">Edit</button>
+								</form>
+							</td>
+							<td>
+								<form th:action="@{/delete}" action="#" method="post" th:object="${p}">
+									<input name="id" type=hidden th:value="${p.id}">
+									<button class="btn btn-danger" type="submit" name="DeleteProduct">Delete</button>
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
-</div>
 
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/scripts.js"></script>
-  </body>
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/scripts.js"></script>
+</body>
+
 </html>

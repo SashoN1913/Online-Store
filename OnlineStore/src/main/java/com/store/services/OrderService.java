@@ -33,6 +33,5 @@ public class OrderService
 	public void removeOrder(int id) {
 		orderRepository.deleteById(id);
 	}
-
-	
+		
 }
