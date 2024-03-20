@@ -10,18 +10,21 @@ import com.store.models.LoginModel;
 
 @Controller
 @RequestMapping("/login")
-public class LoginController {
+public class LoginController
+{
 
 	@GetMapping("/")
-	public String displayLoginForm(Model model) {
-		
+	public String displayLoginForm(Model model)
+	{
+
 		model.addAttribute("loginModel", new LoginModel());
 		return "loginForm.html";
 	}
-	
+
 	@PostMapping("/processLogin")
-	public String processLogin(LoginModel loginModel, Model model) {
-		
+	public String processLogin(LoginModel loginModel, Model model)
+	{
+
 		model.addAttribute("email", loginModel.getEmail());
 		model.addAttribute("password", loginModel.getPassword());
 		System.out.println(loginModel.getEmail());
