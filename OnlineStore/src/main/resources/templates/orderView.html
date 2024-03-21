@@ -22,6 +22,7 @@
 							<th>Total</th>
 							<th>User_id</th>
 							<th>Address</th>
+							<th>Details</th>
 							<th>Edit</th>
 							<th>Delete</th>
 						</tr>
@@ -32,8 +33,14 @@
 							<td th:text="${o.status}"></td>
 							<td th:text="${o.date}"></td>
 							<td th:text="${o.total}"></td>
-							<td th:text="${o.userId}"></td>
+							<td th:text="${o.user}"></td>
 							<td th:text="${o.address}"></td>
+							<td>
+								<form th:action="@{/orderDetails}" action="#" method="post" th:object="${o}">
+									<input name="id" type=hidden th:value="${o.id}">
+									<button class="btn btn-secondary" type="submit" name="editOrder">Edit</button>
+								</form>
+							</td>
 							<td>
 								<form th:action="@{/orderEdit}" action="#" method="post" th:object="${o}">
 									<input name="id" type=hidden th:value="${o.id}">

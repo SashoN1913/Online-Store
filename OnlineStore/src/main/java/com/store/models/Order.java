@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -27,9 +28,10 @@ public class Order
 	private Date date;
 	private Double total;
 	
-	private int userId;
+	@ManyToOne
+	private User user;
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne
 	private Address address;
 
 	public Order()
@@ -77,14 +79,14 @@ public class Order
 		this.total = total;
 	}
 
-	public int getUserId()
+	public User getUser()
 	{
-		return userId;
+		return user;
 	}
 
-	public void setUserId(int userId)
+	public void setUser(User user)
 	{
-		this.userId = userId;
+		this.user = user;
 	}
 
 	public Address getAddress()
@@ -100,7 +102,7 @@ public class Order
 	@Override
 	public String toString()
 	{
-		return "Order [id=" + id + ", status=" + status + ", date=" + date + ", total=" + total + ", userId=" + userId
+		return "Order [id=" + id + ", status=" + status + ", date=" + date + ", total=" + total + ", user=" + user
 				+ ", address=" + address + "]";
 	}
 }
