@@ -1,23 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="en" layout:decorate="layouts/defaultLayout" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>Online Store</title>
-
-	<meta name="description" content="Source code generated using layoutit.com">
-	<meta name="author" content="LayoutIt!">
-
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/style.css" rel="stylesheet">
-
-</head>
+<head th:replace="common/header :: header"></head>
 
 <body>
+	
+	<div th:replace="common/header :: navbar"></div>
 
 	<div class="container-fluid">
 		<div class="row">
@@ -43,15 +31,15 @@
 							<td th:text="${p.stock}"></td>
 							<td th:text="${p.price}"></td>
 							<td>
-								<form th:action="@{/editForm}" action="#" method="post" th:object="${p}">
+								<form th:action="@{/productEdit}" action="#" method="post" th:object="${p}">
 									<input name="id" type=hidden th:value="${p.id}">
 									<button class="btn btn-secondary" type="submit" name="editProduct">Edit</button>
 								</form>
 							</td>
 							<td>
-								<form th:action="@{/delete}" action="#" method="post" th:object="${p}">
+								<form th:action="@{/productDelete}" action="#" method="post" th:object="${p}">
 									<input name="id" type=hidden th:value="${p.id}">
-									<button class="btn btn-danger" type="submit" name="DeleteProduct">Delete</button>
+									<button class="btn btn-danger" type="submit" name="deleteProduct">Delete</button>
 								</form>
 							</td>
 						</tr>
@@ -61,9 +49,8 @@
 		</div>
 	</div>
 
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/scripts.js"></script>
+	<div th:replace="common/header :: body-scripts"></div>
+	
 </body>
 
 </html>

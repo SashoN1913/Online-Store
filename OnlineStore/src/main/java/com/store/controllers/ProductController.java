@@ -19,62 +19,51 @@ public class ProductController
 
 	@Autowired
 	private ProductService productService;
-
-	@GetMapping("/products")
-	public String getProdusts(Model model)
+	
+	@GetMapping("/productView")
+	public String view(Model model)
 	{
 		model.addAttribute("products", productService.getProducts());
-
-		return "index.html";
+		return "productView.html";
 	}
 
-	@GetMapping("/addProduct")
+	@GetMapping("/productAdd")
 	public String addProduct(Model model)
 	{
 		model.addAttribute("product", new Product());
-
-		return "addProduct.html";
+		return "productAdd.html";
 	}
 
-	@GetMapping("/productsAdmin")
-	public String admin(Model model)
-	{
-		model.addAttribute("products", productService.getProducts());
-		return "productsAdmin.html";
-	}
-
-	@PostMapping("/addNew")
+	@PostMapping("/productAddUpdate")
 	public String addNew(@Validated Product product, BindingResult bindingResult, Model model)
 	{
 		productService.addProduct(product);
 		model.addAttribute("products", productService.getProducts());
-		return "index.html";
+		return "productView.html";
 	}
+	
 
-	@PostMapping("/editForm")
+	@PostMapping("/productEdit")
 	public String edit(@Validated Product product, BindingResult bindingResult, Model model)
 	{
-		System.out.println("edit - " + product.getId());
 		model.addAttribute("product", productService.getProduct(product.getId()));
-		return "editProduct.html";
+		return "productEdit.html";
 	}
 
-	@PostMapping("/update")
+	@PostMapping("/productUpdate")
 	public String update(@Validated Product product, BindingResult bindingResult, Model model)
 	{
-		System.out.println(product);
 		productService.updateProduct(product.getId(), product);
 		model.addAttribute("products", productService.getProducts());
-		return "productsAdmin.html";
+		return "productView.html";
 	}
 
-	@PostMapping("/delete")
+	@PostMapping("/productDelete")
 	public String delete(@Validated Product product, BindingResult bindingResult, Model model)
 	{
-		System.out.println("Delete - " + product.getId());
 		productService.removeProduct(product.getId());
 		model.addAttribute("products", productService.getProducts());
-		return "productsAdmin.html";
+		return "productView.html";
 	}
 
 //	@RequestMapping("/delete")

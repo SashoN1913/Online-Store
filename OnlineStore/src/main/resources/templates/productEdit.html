@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html layout:decorate="layouts/defaultLayout" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="en" layout:decorate="layouts/defaultLayout" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="common/header :: header"></head>
 
@@ -10,7 +9,10 @@
 
 	<div layout:fragment="content">
 		<div class="container mt-3 mb-3">
-			<form th:action="@{/addNew}" action="#" method="post" th:object="${product}">
+			<form th:action="@{/productAddUpdate}" action="#" method="post" th:object="${product}">
+				
+				<input name="id" type=hidden th:value="${product.id}">
+				
 				<div class="mb-3">
 					<label for="productTitleInput" class="form-label">Product Title</label>
 					<input th:field="*{title}" type="text" class="form-control" id="productTitleInput" aria-describedby="productTitleHelp">
@@ -28,14 +30,14 @@
 					<input th:field="*{price}" type="text" class="form-control" id="productPriceInput" aria-describedby="productPriceHelp">
 					<div id="productPriceHelp" class="form-text">Enter product price</div>
 				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="submit" class="btn btn-primary">Update</button>
+				<a class="btn btn-danger" th:href="@{/productView}">Cancel</a>
 			</form>
 		</div>
 	</div>
 
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/scripts.js"></script>
+	<div th:replace="common/header :: body-scripts"></div>
+	
 </body>
 
 </html>
