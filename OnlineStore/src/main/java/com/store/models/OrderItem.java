@@ -1,6 +1,5 @@
 package com.store.models;
 
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
@@ -13,13 +12,12 @@ public class OrderItem
 	@Id
 	private int id;
 	private int quantity;
+	private double total;
 	
 	@OneToOne
-	@JoinColumn(name="product_id")
 	private Product product;
 	
 	@ManyToOne
-	@JoinColumn(name="user_id")
 	private Order order;
 
 	public OrderItem()
@@ -67,9 +65,20 @@ public class OrderItem
 		this.order = order;
 	}
 
+	public double getTotal()
+	{
+		return total;
+	}
+
+	public void setTotal(double total)
+	{
+		this.total = total;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "OrderItem [id=" + id + ", quantity=" + quantity + ", product=" + product + ", order=" + order + "]";
+		return "OrderItem [id=" + id + ", quantity=" + quantity + ", total=" + total + ", product=" + product
+				+ ", order=" + order + "]";
 	}
 }

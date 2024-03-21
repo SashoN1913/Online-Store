@@ -22,13 +22,13 @@ public class OrderService
 
 	public Order getOrder(int id)
 	{
-		Optional<Order> o = orderRepository.findById(id);
-		return o.get();
+		Optional<Order> order = orderRepository.findById(id);
+		return order.get();
 	}
 
-	public void addOrder(Order p)
+	public void addOrder(Order order)
 	{
-		orderRepository.save(p);
+		orderRepository.save(order);
 	}
 
 	public void removeOrder(int id)
@@ -36,9 +36,9 @@ public class OrderService
 		orderRepository.deleteById(id);
 	}
 
-	public void updateOrder(int id, Order p)
+	public void updateOrder(int id, Order order)
 	{
-		p.setId(id);
-		addOrder(p);
+		order.setId(id);
+		addOrder(order);
 	}
 }

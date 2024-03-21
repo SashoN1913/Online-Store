@@ -7,6 +7,41 @@
 
 	<div th:replace="common/header :: navbar"></div>
 
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12" th:object="${order}">
+				<h3>
+					Order - <span th:text="${order.id}"></span>
+				</h3>
+				<h3>
+					For - <span th:text="${order.user}"></span>
+				</h3>
+				<h3>
+					Address - <span th:text="${order.address}"></span>
+				</h3>
+				<table class="table table-hover table-striped">
+					<thead>
+						<tr>
+							<th>Product</th>
+							<th>Quantity</th>
+							<th>Price</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="item : ${items}">
+							<td th:text="${item.product.title}"></td>
+							<td th:text="${item.quantity}"></td>
+							<td th:text="${item.product.price}"></td>
+							<td th:text="${item.total}">-</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<!--
 	<div layout:fragment="content">
 		<div class="container mt-3 mb-3">
 			<form th:action="@{/orderUpdate}" action="#" method="post" th:object="${order}">
@@ -32,7 +67,7 @@
 
 				<div class="mb-3">
 					<label for="orderUserInput" class="form-label">Order user</label>
-					<input th:field="*{user}" type="text" class="form-control" id="orderUserInput" disabled>
+					<input th:field="*{userId}" type="text" class="form-control" id="orderUserInput" disabled>
 				</div>
 
 				<div class="mb-3">
@@ -45,7 +80,7 @@
 			</form>
 		</div>
 	</div>
-
+-->
 	<div th:replace="common/header :: body-scripts"></div>
 
 </body>

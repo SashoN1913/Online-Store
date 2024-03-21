@@ -1,5 +1,7 @@
 package com.store.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.store.models.Order;
+import com.store.models.OrderItem;
 import com.store.models.Product;
+import com.store.services.OrderItemService;
 import com.store.services.OrderService;
 
 @Controller
@@ -18,6 +22,8 @@ public class OrderController
 	
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private OrderItemService orderItemService;
 
 	@GetMapping("/orderView")
 	public String view(Model model)
@@ -40,11 +46,12 @@ public class OrderController
 		model.addAttribute("orders", orderService.getOrders());
 		return "orderView.html";
 	}
-	
 
 	@PostMapping("/orderEdit")
 	public String edit(@Validated Order order, BindingResult bindingResult, Model model)
 	{
+		Order ord = orderService.getOrder(order.getId());
+		System.out.println(ord.getUser());
 		model.addAttribute("order", orderService.getOrder(order.getId()));
 		return "orderEdit.html";
 	}
@@ -65,5 +72,15 @@ public class OrderController
 		orderService.removeOrder(order.getId());
 		model.addAttribute("orders", orderService.getOrders());
 		return "orderView.html";
+	}
+	
+	@PostMapping("/orderDetails")
+	public String details(@Validated Order order, BindingResult bindingResult, Model model)
+	{
+		List<OrderItem> items = orderItemService.getOrderItemsByOrderId(order.getId());
+		System.out.println(items);
+		model.addAttribute("items", items);
+		model.addAttribute("order", orderService.getOrder(order.getId()));
+		return "orderDetails.html";
 	}
 }
