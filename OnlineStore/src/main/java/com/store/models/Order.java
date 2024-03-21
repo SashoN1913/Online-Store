@@ -2,37 +2,39 @@ package com.store.models;
 
 import java.util.Date;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.FetchType;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+
 
 @Entity
 @Table(name="user_order")
 public class Order
 {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String status;
 	private Date date;
 	private Double total;
+	
 	private int userId;
-	private int addressId;
+	
+	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	private Address address;
 
 	public Order()
 	{
 
-	}
-
-	public Order(int id, String status, Date date, Double total, int userId, int addressId)
-	{
-		super();
-		this.id = id;
-		this.status = status;
-		this.date = date;
-		this.total = total;
-		this.userId = userId;
-		this.addressId = addressId;
 	}
 
 	public int getId()
@@ -85,20 +87,20 @@ public class Order
 		this.userId = userId;
 	}
 
-	public int getAddressId()
+	public Address getAddress()
 	{
-		return addressId;
+		return address;
 	}
 
-	public void setAddressId(int addressId)
+	public void setAddress(Address address)
 	{
-		this.addressId = addressId;
+		this.address = address;
 	}
 	
 	@Override
 	public String toString()
 	{
 		return "Order [id=" + id + ", status=" + status + ", date=" + date + ", total=" + total + ", userId=" + userId
-				+ ", addressId=" + addressId + "]";
+				+ ", address=" + address + "]";
 	}
 }

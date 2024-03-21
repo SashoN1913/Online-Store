@@ -14,24 +14,31 @@ public class OrderService
 {
 	@Autowired
 	private OrderRepository orderRepository;
-	
+
 	public List<Order> getOrders()
 	{
 		return orderRepository.findAll();
 	}
-	
+
 	public Order getOrder(int id)
 	{
 		Optional<Order> o = orderRepository.findById(id);
 		return o.get();
 	}
-	
-	public void addOrder(Order p) {
+
+	public void addOrder(Order p)
+	{
 		orderRepository.save(p);
 	}
-	
-	public void removeOrder(int id) {
+
+	public void removeOrder(int id)
+	{
 		orderRepository.deleteById(id);
 	}
-		
+
+	public void updateOrder(int id, Order p)
+	{
+		p.setId(id);
+		addOrder(p);
+	}
 }

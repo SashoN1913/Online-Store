@@ -14,12 +14,11 @@ public class Product
 	private String title;
 	private int stock;
 	private double price;
-	
 
 	public Product()
 	{
+		
 	}
-
 
 	public Product(int id, String title, int stock, double price)
 	{

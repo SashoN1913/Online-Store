@@ -7,8 +7,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.store.models.Product;
 import com.store.services.ProductService;
@@ -28,14 +26,14 @@ public class ProductController
 	}
 
 	@GetMapping("/productAdd")
-	public String addProduct(Model model)
+	public String add(Model model)
 	{
 		model.addAttribute("product", new Product());
 		return "productAdd.html";
 	}
 
 	@PostMapping("/productAddUpdate")
-	public String addNew(@Validated Product product, BindingResult bindingResult, Model model)
+	public String addPost(@Validated Product product, BindingResult bindingResult, Model model)
 	{
 		productService.addProduct(product);
 		model.addAttribute("products", productService.getProducts());
@@ -51,7 +49,7 @@ public class ProductController
 	}
 
 	@PostMapping("/productUpdate")
-	public String update(@Validated Product product, BindingResult bindingResult, Model model)
+	public String editPost(@Validated Product product, BindingResult bindingResult, Model model)
 	{
 		productService.updateProduct(product.getId(), product);
 		model.addAttribute("products", productService.getProducts());

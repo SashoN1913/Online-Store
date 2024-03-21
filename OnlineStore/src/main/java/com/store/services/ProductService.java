@@ -14,23 +14,23 @@ public class ProductService
 {
 	@Autowired
 	private ProductRepository productRepository;
-	
+
 	public List<Product> getProducts()
 	{
 		return productRepository.findAll();
 	}
-	
+
 	public Product getProduct(int id)
 	{
 		Optional<Product> p = productRepository.findById(id);
 		return p.get();
 	}
-	
+
 	public void addProduct(Product p)
 	{
 		productRepository.save(p);
 	}
-	
+
 	public void removeProduct(int id)
 	{
 		productRepository.deleteById(id);
@@ -41,5 +41,4 @@ public class ProductService
 		p.setId(id);
 		addProduct(p);
 	}
-
 }
