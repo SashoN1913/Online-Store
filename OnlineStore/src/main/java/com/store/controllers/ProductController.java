@@ -7,11 +7,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.store.models.Product;
 import com.store.services.ProductService;
 
 @Controller
+@RequestMapping("/admin")
 public class ProductController
 {
 
@@ -22,7 +24,7 @@ public class ProductController
 	public String view(Model model)
 	{
 		model.addAttribute("products", productService.getProducts());
-		return "productView.html";
+		return "admin/productView.html";
 	}
 
 	@GetMapping("/productAdd")

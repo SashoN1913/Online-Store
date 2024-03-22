@@ -9,7 +9,7 @@
 
 	<div layout:fragment="content">
 		<div class="container mt-3 mb-3">
-			<form th:action="@{/addNew}" action="#" method="post" th:object="${product}">
+			<form th:action="@{/productAddUpdate}" action="#" method="post" th:object="${product}">
 				<div class="mb-3">
 					<label for="productTitleInput" class="form-label">Product Title</label>
 					<input th:field="*{title}" type="text" class="form-control" id="productTitleInput" aria-describedby="productTitleHelp">

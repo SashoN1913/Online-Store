@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="layouts/defaultLayout" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: header"></head>
+
+<body>
+
+	<div th:replace="common/header :: navbar"></div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-md-3 mt-4" th:each="p : ${products}">
+				<div class="card">
+					<a th:href="@{/storeProductDetails?id=}+${p.id}">
+						<img src="https://buybest.bg/storage/public/uploads/media-manager/app-modules-shop-models-product/1181/4152/iphone-14-pro-finish-select-202209-6-1inch-spaceblack.jpeg"
+							class="card-img-top">
+					</a>
+					<div class="card-body">
+						<h4 class="card-title" th:text="${p.title}"></h4>
+						<h5> Price: <span th:text="${p.price}"></span></h5>
+						<form th:action="@{/buy}" action="#" method="post" th:object="${p}">
+							<input name="id" type=hidden th:value="${p.id}">
+							<button class="btn btn-success" type="submit" name="addToCart">Add to Cart</button>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="common/header :: body-scripts"></div>
+
+</body>
+
+</html>
