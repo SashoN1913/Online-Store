@@ -10,6 +10,14 @@ public class CustomUserDetails implements UserDetails
 	
 	private User user;
 	
+	
+	
+	public CustomUserDetails(User user)
+	{
+		super();
+		this.user = user;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities()
 	{
