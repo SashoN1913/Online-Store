@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,13 +17,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.store.repository.UserRepository;
 import com.store.services.CustomUserDetailsService;
+import com.store.services.UserService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig
 {
 
+	@Autowired
+	private CustomAuthentication authentication;
 	/*
 	 * public AuthenticationProvider daoAuthenticationProvider() {
 	 * DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -30,43 +35,39 @@ public class SecurityConfig
 	 * provider.setUserDetailsService(this.databaseUserDetailsService); return
 	 * provider; }
 	 */
-	@Autowired
-	private DataSource dataSource;
 
-	@Autowired
-	UserDetailsService userDetailsService;
-
-	@Bean
-	UserDetailsService userDetailsService()
-	{
-		return new CustomUserDetailsService();
-	}
-
-	public DaoAuthenticationProvider authenticationProvider()
-	{
-		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-		authProvider.setUserDetailsService(userDetailsService());
-		authProvider.setPasswordEncoder(passwordEncoder());
-
-		return authProvider;
-	}
-
+	/*
+	 * @Autowired private DataSource dataSource;
+	 * 
+	 * @Autowired UserRepository userDetailsService;
+	 * 
+	 * @Bean UserDetailsService userDetailsService() { return new
+	 * CustomUserDetailsService(); }
+	 * 
+	 * public DaoAuthenticationProvider authenticationProvider() {
+	 * DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+	 * authProvider.setUserDetailsService(userDetailsService());
+	 * authProvider.setPasswordEncoder(passwordEncoder());
+	 * 
+	 * return authProvider; }
+	 */
+	@Primary
 	@Bean
 	public AuthenticationManagerBuilder confi(AuthenticationManagerBuilder auth) throws Exception
 	{
-		auth.userDetailsService(userDetailsService());
+		auth.authenticationProvider(authentication);
 		return auth;
 	}
 
-	@Bean
-	AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception
-	{
-		return configuration.getAuthenticationManager();
-	}
+	/*
+	 * @Bean AuthenticationManager authenticationManager(AuthenticationConfiguration
+	 * configuration) throws Exception { return
+	 * configuration.getAuthenticationManager(); }
+	 */
 
 	/*
 	 * @Autowired public void configureGlobal(AuthenticationManagerBuilder auth)
-	 * throws Exception { auth.userDetailsService(userDetailsService());
+	 * throws Exception { auth.userDetailsService(CustomUserDetails());
 	 * 
 	 * auth.jdbcAuthentication()
 	 * .dataSource(dataSource).passwordEncoder(passwordEncoder());
@@ -86,6 +87,12 @@ public class SecurityConfig
 	 */
 
 	@Bean
+	public UserDetailsService userDetailsService(UserRepository userRepository)
+	{
+		return new UserService(userRepository);
+	}
+
+	@Bean
 	static PasswordEncoder passwordEncoder()
 	{
 		return new BCryptPasswordEncoder();
@@ -95,7 +102,9 @@ public class SecurityConfig
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception
 	{
 		http.authorizeHttpRequests((requests) -> requests.requestMatchers("/product", "/loginResults").permitAll()
-				.anyRequest().authenticated()).formLogin((form) -> form.defaultSuccessUrl("/orderView").permitAll())
+				.anyRequest().authenticated())
+				.formLogin((form) -> form.usernameParameter("email").passwordParameter("password")
+						.defaultSuccessUrl("/orderView").permitAll())
 				.logout((logout) -> logout.permitAll());
 
 		return http.build();
