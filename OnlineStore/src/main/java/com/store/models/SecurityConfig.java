@@ -101,10 +101,10 @@ public class SecurityConfig
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception
 	{
-		http.authorizeHttpRequests((requests) -> requests.requestMatchers("/product", "/loginResults").permitAll()
+		http.authorizeHttpRequests((requests) -> requests.requestMatchers("/product", "/store").permitAll()
 				.anyRequest().authenticated())
 				.formLogin((form) -> form.usernameParameter("email").passwordParameter("password")
-						.defaultSuccessUrl("/orderView").permitAll())
+						.defaultSuccessUrl("/loginResults").permitAll())
 				.logout((logout) -> logout.permitAll());
 
 		return http.build();
