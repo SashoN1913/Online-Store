@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" layout:decorate="layouts/defaultLayout" xmlns:th="http://www.thymeleaf.org">
 	
-<head th:replace="common/header :: header"></head>
+<head th:replace="~{commonnnn/adminHeader.html :: header}"></head>
 
 <body>
 	
-	<div th:replace="common/header :: navbar"></div>
+	<div th:replace="~{common/header :: adminNavbar}"></div>
 
 	<div layout:fragment="content">
 		<div class="container mt-3 mb-3">
-			<form th:action="@{/productAddUpdate}" action="#" method="post" th:object="${product}">
+			<form th:action="@{/admin/productttttttttAddUpdate}" action="#" method="post" th:object="${product}">
 				<div class="mb-3">
 					<label for="productTitleInput" class="form-label">Product Title</label>
 					<input th:field="*{title}" type="text" class="form-control" id="productTitleInput" aria-describedby="productTitleHelp">
@@ -32,7 +32,7 @@
 		</div>
 	</div>
 	
-	<div th:replace="common/header :: body-scripts"></div>
+	<div th:replace="~{common/header :: body-scripts}"></div>
 
 </body>
 

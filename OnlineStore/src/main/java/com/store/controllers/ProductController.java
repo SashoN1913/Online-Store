@@ -24,7 +24,7 @@ public class ProductController
 	public String view(Model model)
 	{
 		model.addAttribute("products", productService.getProducts());
-		return "admin/productView.html";
+		return "productView.html";
 	}
 
 	@GetMapping("/productAdd")

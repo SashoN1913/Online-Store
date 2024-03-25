@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.store.models.Order;
 import com.store.models.OrderItem;
@@ -17,6 +18,7 @@ import com.store.services.OrderItemService;
 import com.store.services.OrderService;
 
 @Controller
+@RequestMapping("/admin")
 public class OrderController
 {
 	

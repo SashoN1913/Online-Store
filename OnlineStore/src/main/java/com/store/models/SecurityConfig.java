@@ -23,6 +23,7 @@ public class SecurityConfig
 	@Autowired
 	private CustomAuthentication authentication;
 
+<<<<<<< Updated upstream
     /*
      * public AuthenticationProvider daoAuthenticationProvider() {
      * DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -30,6 +31,30 @@ public class SecurityConfig
      * provider.setUserDetailsService(this.databaseUserDetailsService); return
      * provider; }
      */
+=======
+	/*
+	 * @Autowired private DataSource dataSource;
+	 * 
+	 * @Autowired UserRepository userDetailsService;
+	 * 
+	 * @Bean UserDetailsService userDetailsService() { return new
+	 * CustomUserDetailsService(); }
+	 * 
+	 * public DaoAuthenticationProvider authenticationProvider() {
+	 * DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+	 * authProvider.setUserDetailsService(userDetailsService());
+	 * authProvider.setPasswordEncoder(passwordEncoder());
+	 * 
+	 * return authProvider; }
+	 */
+//	@Primary
+//	@Bean
+//	public AuthenticationManagerBuilder confi(AuthenticationManagerBuilder auth) throws Exception
+//	{
+//		auth.authenticationProvider(authentication);
+//		return auth;
+//	}
+>>>>>>> Stashed changes
 
     /*
      * @Autowired private DataSource dataSource;
@@ -60,6 +85,7 @@ public class SecurityConfig
      * configuration.getAuthenticationManager(); }
      */
 
+<<<<<<< Updated upstream
     /*
      * @Autowired public void configureGlobal(AuthenticationManagerBuilder auth)
      * throws Exception { auth.userDetailsService(CustomUserDetails());
@@ -86,42 +112,47 @@ public class SecurityConfig
 	{
 		return new UserService(userRepository);
 	}
+=======
+//	@Bean
+//	public UserDetailsService userDetailsService(UserRepository userRepository)
+//	{
+//		return new UserService(userRepository);
+//	}
+>>>>>>> Stashed changes
 
-	@Bean
-	static PasswordEncoder passwordEncoder()
-	{
-		return new BCryptPasswordEncoder();
-	}
+//	@Bean
+//	static PasswordEncoder passwordEncoder()
+//	{
+//		return new BCryptPasswordEncoder();
+//	}
 
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception
 	{
+<<<<<<< Updated upstream
 		http.authorizeHttpRequests((requests) -> requests.requestMatchers("/product", "/").permitAll()
 				.anyRequest().authenticated())
 				.formLogin((form) -> form.loginPage("/login").usernameParameter("email").passwordParameter("password")
 						.defaultSuccessUrl("/index").permitAll())
 				.logout((logout) -> logout.permitAll());
+=======
+		 return http
+	            .authorizeHttpRequests(auth -> {
+	            	auth.requestMatchers("/**").permitAll();
+	            	//auth.anyRequest().authenticated();
+	            })
+	            .build();
+		 
+//		http.authorizeHttpRequests(
+//				(requests) -> requests.requestMatchers("/product", "/store").permitAll().anyRequest().authenticated())
+//				.formLogin((form) -> form.usernameParameter("email").passwordParameter("password")
+//						.defaultSuccessUrl("/loginResults").permitAll())
+//				.logout((logout) -> logout.permitAll());
+//
+//		return http.build();
+>>>>>>> Stashed changes
 
-		return http.build();
 
-		/*
-		 * http.authorizeHttpRequests((authorize) ->
-		 * authorize.anyRequest().authenticated()).formLogin( form ->
-		 * form.loginPage("/login/").loginProcessingUrl("/index.html").defaultSuccessUrl
-		 * ("/index.html").permitAll()) .logout(logout ->
-		 * logout.logoutRequestMatcher(new
-		 * AntPathRequestMatcher("/logout")).permitAll());
-		 * 
-		 * return http.build();
-		 */
 	}
 
-	/*
-	 * @Bean SecurityFilterChain filterSecurity(HttpSecurity http) throws Exception
-	 * { http.csrf(null) .authorizeHttpRequests((authorize) ->
-	 * authorize.anyRequest().authenticated() ).formLogin( form -> form
-	 * .loginPage("/login") .loginProcessingUrl("/login") .defaultSuccessUrl("/")
-	 * .permitAll() ).logout( logout -> logout .logoutRequestMatcher(new
-	 * AntPathRequestMatcher("/logout")) .permitAll() ); return http.build(); }
-	 */
 }

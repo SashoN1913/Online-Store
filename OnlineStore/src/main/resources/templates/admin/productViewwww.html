@@ -21,7 +21,7 @@
 							<th>Stock</th>
 							<th>Price</th>
 							<th>Edit</th>
-							<th>Delete</th>
+							<th>Deleteeee</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -31,13 +31,13 @@
 							<td th:text="${p.stock}"></td>
 							<td th:text="${p.price}"></td>
 							<td>
-								<form th:action="@{/productEdit}" action="#" method="post" th:object="${p}">
+								<form th:action="@{/admin/productEdit}" action="#" method="post" th:object="${p}">
 									<input name="id" type=hidden th:value="${p.id}">
 									<button class="btn btn-secondary" type="submit" name="editProduct">Edit</button>
 								</form>
 							</td>
 							<td>
-								<form th:action="@{/productDelete}" action="#" method="post" th:object="${p}">
+								<form th:action="@{/admin/productDelete}" action="#" method="post" th:object="${p}">
 									<input name="id" type=hidden th:value="${p.id}">
 									<button class="btn btn-danger" type="submit" name="deleteProduct">Delete</button>
 								</form>

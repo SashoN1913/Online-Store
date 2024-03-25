@@ -9,7 +9,7 @@
 
 	<div layout:fragment="content">
 		<div class="container mt-3 mb-3">
-			<form th:action="@{/productAddUpdate}" action="#" method="post" th:object="${product}">
+			<form th:action="@{/admin/productAddUpdate}" action="#" method="post" th:object="${product}">
 				
 				<input name="id" type=hidden th:value="${product.id}">
 				
@@ -31,7 +31,7 @@
 					<div id="productPriceHelp" class="form-text">Enter product price</div>
 				</div>
 				<button type="submit" class="btn btn-primary">Update</button>
-				<a class="btn btn-danger" th:href="@{/productView}">Cancel</a>
+				<a class="btn btn-danger" th:href="@{/admin/productView}">Cancel</a>
 			</form>
 		</div>
 	</div>
