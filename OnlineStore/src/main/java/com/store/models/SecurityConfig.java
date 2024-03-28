@@ -23,7 +23,6 @@ public class SecurityConfig
 	@Autowired
 	private CustomAuthentication authentication;
 
-<<<<<<< Updated upstream
     /*
      * public AuthenticationProvider daoAuthenticationProvider() {
      * DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -31,7 +30,7 @@ public class SecurityConfig
      * provider.setUserDetailsService(this.databaseUserDetailsService); return
      * provider; }
      */
-=======
+
 	/*
 	 * @Autowired private DataSource dataSource;
 	 * 
@@ -54,7 +53,7 @@ public class SecurityConfig
 //		auth.authenticationProvider(authentication);
 //		return auth;
 //	}
->>>>>>> Stashed changes
+
 
     /*
      * @Autowired private DataSource dataSource;
@@ -85,7 +84,6 @@ public class SecurityConfig
      * configuration.getAuthenticationManager(); }
      */
 
-<<<<<<< Updated upstream
     /*
      * @Autowired public void configureGlobal(AuthenticationManagerBuilder auth)
      * throws Exception { auth.userDetailsService(CustomUserDetails());
@@ -112,13 +110,12 @@ public class SecurityConfig
 	{
 		return new UserService(userRepository);
 	}
-=======
 //	@Bean
 //	public UserDetailsService userDetailsService(UserRepository userRepository)
 //	{
 //		return new UserService(userRepository);
 //	}
->>>>>>> Stashed changes
+
 
 //	@Bean
 //	static PasswordEncoder passwordEncoder()
@@ -129,13 +126,11 @@ public class SecurityConfig
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception
 	{
-<<<<<<< Updated upstream
 		http.authorizeHttpRequests((requests) -> requests.requestMatchers("/product", "/").permitAll()
 				.anyRequest().authenticated())
 				.formLogin((form) -> form.loginPage("/login").usernameParameter("email").passwordParameter("password")
 						.defaultSuccessUrl("/index").permitAll())
 				.logout((logout) -> logout.permitAll());
-=======
 		 return http
 	            .authorizeHttpRequests(auth -> {
 	            	auth.requestMatchers("/**").permitAll();
@@ -150,7 +145,6 @@ public class SecurityConfig
 //				.logout((logout) -> logout.permitAll());
 //
 //		return http.build();
->>>>>>> Stashed changes
 
 
 	}
