@@ -17,7 +17,7 @@ public class StoreController
 	@Autowired
 	private ProductService productService;
 	
-	@GetMapping("/")
+	@GetMapping("/store")
 	public String view(Model model)
 	{
 		model.addAttribute("products", productService.getProducts());

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" layout:decorate="layouts/defaultLayout" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="common/header :: header"></head>
+<head th:replace="~{/admin/common/adminHeader.html :: header}"></head>
 
 <body>
 
-	<div th:replace="common/header :: navbar"></div>
+	<div th:replace="~{/admin/common/adminHeader.html :: navbar}"></div>
 
 	<div class="container-fluid">
 		<div class="row">
@@ -36,19 +36,19 @@
 							<td th:text="${o.user}"></td>
 							<td th:text="${o.address}"></td>
 							<td>
-								<form th:action="@{/orderDetails}" action="#" method="post" th:object="${o}">
+								<form th:action="@{/admin/orderDetails}" action="#" method="post" th:object="${o}">
 									<input name="id" type=hidden th:value="${o.id}">
 									<button class="btn btn-primary" type="submit" name="detailsOrder">Details</button>
 								</form>
 							</td>
 							<td>
-								<form th:action="@{/orderEdit}" action="#" method="post" th:object="${o}">
+								<form th:action="@{/admin/orderEdit}" action="#" method="post" th:object="${o}">
 									<input name="id" type=hidden th:value="${o.id}">
 									<button class="btn btn-secondary" type="submit" name="editOrder">Edit</button>
 								</form>
 							</td>
 							<td>
-								<form th:action="@{/orderDelete}" action="#" method="post" th:object="${o}">
+								<form th:action="@{/admin/orderDelete}" action="#" method="post" th:object="${o}">
 									<input name="id" type=hidden th:value="${o.id}">
 									<button class="btn btn-danger" type="submit" name="deleteOrder">Delete</button>
 								</form>
@@ -60,7 +60,7 @@
 		</div>
 	</div>
 
-	<div th:replace="common/header :: body-scripts"></div>
+	<div th:replace="~{/admin/common/adminHeader.html :: body-scripts}"></div>
 
 </body>
 

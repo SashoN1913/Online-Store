@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" layout:decorate="layouts/defaultLayout" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{common/header :: header}"></head>
+<head th:replace="~{/admin/common/adminHeader.html :: header}"></head>
 
 <body>
 
-	<div th:replace="~{common/header :: navbar}"></div>
+	<div th:replace="~{/admin/common/adminHeader.html :: navbar}"></div>
 
 	<div class="container-fluid">
 		<div class="row">
@@ -30,9 +30,9 @@
 					</thead>
 					<tbody>
 						<tr th:each="item : ${items}">
-							<td th:text="${item.product.title}"></td>
+							<td th:text="${item.product}"></td>
 							<td th:text="${item.quantity}"></td>
-							<td th:text="${item.product.price}"></td>
+							<td th:text="${item.product}"></td>
 							<td th:text="${item.total}">-</td>
 						</tr>
 					</tbody>
@@ -41,47 +41,7 @@
 		</div>
 	</div>
 
-	<!--
-	<div layout:fragment="content">
-		<div class="container mt-3 mb-3">
-			<form th:action="@{/orderUpdate}" action="#" method="post" th:object="${order}">
-
-				<input name="id" type=hidden th:value="${order.id}">
-
-				<div class="mb-3">
-					<label for="orderStatusInput" class="form-label">Order Status</label>
-					<input th:field="*{status}" type="text" class="form-control" id="orderStatusInput"
-						aria-describedby="productTitleHelp">
-					<div id="productTitleHelp" class="form-text">Enter status of order</div>
-				</div>
-
-				<div class="mb-3">
-					<label for="orederDateInput" class="form-label">Order date</label>
-					<input th:field="*{date}" type="text" class="form-control" id="orederDateInput" disabled>
-				</div>
-
-				<div class="mb-3">
-					<label for="orederTotalInput" class="form-label">Order total</label>
-					<input th:field="*{total}" type="text" class="form-control" id="orederTotalInput" disabled>
-				</div>
-
-				<div class="mb-3">
-					<label for="orderUserInput" class="form-label">Order user</label>
-					<input th:field="*{userId}" type="text" class="form-control" id="orderUserInput" disabled>
-				</div>
-
-				<div class="mb-3">
-					<label for="orederAddressInput" class="form-label">Order address</label>
-					<input th:field="*{address}" type="text" class="form-control" id="orederAddressInput" disabled>
-				</div>
-
-				<button type="submit" class="btn btn-primary">Update</button>
-				<a class="btn btn-danger" th:href="@{/orderView}">Cancel</a>
-			</form>
-		</div>
-	</div>
--->
-	<div th:replace="~{common/header :: body-scripts}"></div>
+	<div th:replace="~{/admin/common/adminHeader.html :: body-scripts}"></div>
 
 </body>
 

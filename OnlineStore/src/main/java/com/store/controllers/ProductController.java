@@ -1,4 +1,4 @@
-package com.store.controllers;
+	package com.store.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,22 +24,23 @@ public class ProductController
 	public String view(Model model)
 	{
 		model.addAttribute("products", productService.getProducts());
-		return "productView.html";
+		return "admin/productView.html";
 	}
 
 	@GetMapping("/productAdd")
 	public String add(Model model)
 	{
 		model.addAttribute("product", new Product());
-		return "productAdd.html";
+		return "admin/productAdd.html";
 	}
 
 	@PostMapping("/productAddUpdate")
 	public String addPost(@Validated Product product, BindingResult bindingResult, Model model)
 	{
+		System.out.println(product);
 		productService.addProduct(product);
 		model.addAttribute("products", productService.getProducts());
-		return "productView.html";
+		return "admin/productView.html";
 	}
 	
 
@@ -47,7 +48,7 @@ public class ProductController
 	public String edit(@Validated Product product, BindingResult bindingResult, Model model)
 	{
 		model.addAttribute("product", productService.getProduct(product.getId()));
-		return "productEdit.html";
+		return "admin/productEdit.html";
 	}
 
 	@PostMapping("/productUpdate")
@@ -55,7 +56,7 @@ public class ProductController
 	{
 		productService.updateProduct(product.getId(), product);
 		model.addAttribute("products", productService.getProducts());
-		return "productView.html";
+		return "admin/productView.html";
 	}
 
 	@PostMapping("/productDelete")
@@ -63,7 +64,7 @@ public class ProductController
 	{
 		productService.removeProduct(product.getId());
 		model.addAttribute("products", productService.getProducts());
-		return "productView.html";
+		return "admin/productView.html";
 	}
 
 //	@RequestMapping("/delete")

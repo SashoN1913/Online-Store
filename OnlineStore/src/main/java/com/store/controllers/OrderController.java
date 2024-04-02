@@ -31,14 +31,14 @@ public class OrderController
 	public String view(Model model)
 	{
 		model.addAttribute("orders", orderService.getOrders());
-		return "orderView.html";
+		return "admin/orderView.html";
 	}
 	
 	@GetMapping("/orderAdd")
 	public String add(Model model)
 	{
 		model.addAttribute("orders", new Product());
-		return "productAdd.html";
+		return "admin/productAdd.html";
 	}
 
 	@PostMapping("/orderAddUpdate")
@@ -46,7 +46,7 @@ public class OrderController
 	{
 		orderService.addOrder(order);
 		model.addAttribute("orders", orderService.getOrders());
-		return "orderView.html";
+		return "admin/orderView.html";
 	}
 
 	@PostMapping("/orderEdit")
@@ -55,7 +55,7 @@ public class OrderController
 		Order ord = orderService.getOrder(order.getId());
 		System.out.println(ord.getUser());
 		model.addAttribute("order", orderService.getOrder(order.getId()));
-		return "orderEdit.html";
+		return "admin/orderEdit.html";
 	}
 
 	@PostMapping("/orderUpdate")
@@ -65,7 +65,7 @@ public class OrderController
 		newOrder.setStatus(order.getStatus());
 		orderService.updateOrder(order.getId(), newOrder);
 		model.addAttribute("orders", orderService.getOrders());
-		return "orderView.html";
+		return "admin/orderView.html";
 	}
 	
 	@PostMapping("/orderDelete")
@@ -73,7 +73,7 @@ public class OrderController
 	{
 		orderService.removeOrder(order.getId());
 		model.addAttribute("orders", orderService.getOrders());
-		return "orderView.html";
+		return "admin/orderView.html";
 	}
 	
 	@PostMapping("/orderDetails")
@@ -83,6 +83,6 @@ public class OrderController
 		System.out.println(items);
 		model.addAttribute("items", items);
 		model.addAttribute("order", orderService.getOrder(order.getId()));
-		return "orderDetails.html";
+		return "admin/orderDetails.html";
 	}
 }

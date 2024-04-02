@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" layout:decorate="layouts/defaultLayout" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="admin/common/header :: header"></head>
+<head th:replace="~{/admin/common/adminHeader.html :: header}"></head>
 
 <body>
 
-	<div th:replace="common/header :: navbar"></div>
+	<div th:replace="~{/admin/common/adminHeader.html :: navbar}"></div>
 
-	<div th:replace="common/header :: body-scripts"></div>
+	<div th:replace="~{/admin/common/adminHeader.html :: body-scripts}"></div>
 
 </body>
 
