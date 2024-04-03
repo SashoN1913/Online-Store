@@ -1,0 +1,97 @@
+diff --git a/OnlineStore/src/main/java/com/store/controllers/OrderController.java b/OnlineStore/src/main/java/com/store/controllers/OrderController.java
+index e3dd7e3..c841640 100644
+--- a/OnlineStore/src/main/java/com/store/controllers/OrderController.java
++++ b/OnlineStore/src/main/java/com/store/controllers/OrderController.java
+@@ -85,4 +85,12 @@
+ 		model.addAttribute("order", orderService.getOrder(order.getId()));
+ 		return "admin/orderDetails.html";
+ 	}
++
++	public void setOrderService(OrderService orderService2) {
++		
++	}
++
++	public void setOrderItemService(OrderItemService orderItemService2) {
++		
++	}
+ }
+diff --git a/OnlineStore/src/test/java/OrderControllerTest/OrderControllerTest.java b/OnlineStore/src/test/java/OrderControllerTest/OrderControllerTest.java
+new file mode 100644
+index 0000000..c36b2f8
+--- /dev/null
++++ b/OnlineStore/src/test/java/OrderControllerTest/OrderControllerTest.java
+@@ -0,0 +1,74 @@
++package OrderControllerTest;
++import static org.mockito.Mockito.*;
++
++import java.util.Arrays;
++import java.util.Collections;
++import java.util.List;
++
++import static org.junit.jupiter.api.Assertions.*;
++import org.junit.jupiter.api.Test;
++import org.springframework.ui.Model;
++
++import com.store.controllers.OrderController;
++import com.store.models.Order;
++import com.store.models.OrderItem;
++import com.store.services.OrderItemService;
++import com.store.services.OrderService;
++
++class OrderControllerTest {
++
++	
++    @Test
++    void orderDetailsTest() {
++    	
++    	// ще използваме ААА метод за тест 
++        // Arrange
++        OrderService orderService = mock(OrderService.class);
++        OrderItemService orderItemService = mock(OrderItemService.class);
++        
++        Order order = new Order(); // Create an example order
++        order.setId(123); // Set an example order ID
++        
++        List<OrderItem> items = Arrays.asList(new OrderItem(), new OrderItem()); // Create example order items
++        
++        when(orderService.getOrder(order.getId())).thenReturn(order);
++        when(orderItemService.getOrderItemsByOrderId(order.getId())).thenReturn(items);
++
++        OrderController controller = new OrderController();
++        controller.setOrderService(orderService);
++        controller.setOrderItemService(orderItemService);
++
++        Model model = mock(Model.class);
++
++        // Act
++        String viewName = controller.details(order, null, model);
++
++        // Assert
++        assertEquals("admin/orderDetails.html", viewName);
++        verify(model).addAttribute("items", items);
++        verify(model).addAttribute("order", order);
++    }
++    
++    @Test
++    void orderDeleteTest() {
++        // Arrange
++        OrderService orderService = mock(OrderService.class);
++        Order order = new Order(); // Create a sample order
++        order.setId(123); // Set a sample order ID
++        
++        when(orderService.getOrders()).thenReturn(Collections.singletonList(order));
++
++        OrderController controller = new OrderController();
++        controller.setOrderService(orderService);
++
++        Model model = mock(Model.class);
++
++        // Act
++        String viewName = controller.delete(order, null, model);
++
++        // Assert
++        assertEquals("admin/orderView.html", viewName);
++        verify(orderService).removeOrder(order.getId());
++        verify(model).addAttribute(eq("orders"), any());
++    }
++}
