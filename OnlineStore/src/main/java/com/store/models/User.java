@@ -1,43 +1,50 @@
 package com.store.models;
 
-import java.util.Set;
+import jakarta.persistence.*;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import java.util.*;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 
 @Entity
-public class User
+@Table(name="user")
+public class User implements UserDetails
 {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	private String firstName;
-	private String lastName;
-	private String phone;
-	private String email;
-	private String password;
-	
-	//@ManyToMany
-	@ManyToMany
-    private Set<Role> roles;
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable=false)
+    private String firstName;
+    
+    @Column(nullable=false)
+    private String lastName;
+
+    @Column(nullable=false, unique=true)
+    private String email;
+
+    @Column(nullable=false)
+    private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Privilege> userRoles = new ArrayList<>();
+
 	public User()
 	{
 		super();
 	}
 
-	public User(String firstName, String lastName, String phone, String email, String password)
+	public Long getId()
 	{
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phone = phone;
-		this.email = email;
-		this.password = password;
+		return id;
+	}
+
+	public void setId(Long id)
+	{
+		this.id = id;
 	}
 
 	public String getFirstName()
@@ -60,16 +67,6 @@ public class User
 		this.lastName = lastName;
 	}
 
-	public String getPhone()
-	{
-		return phone;
-	}
-
-	public void setPhone(String phone)
-	{
-		this.phone = phone;
-	}
-
 	public String getEmail()
 	{
 		return email;
@@ -89,22 +86,58 @@ public class User
 	{
 		this.password = password;
 	}
+
+	public List<Privilege> getRoles()
+	{
+		return userRoles;
+	}
+
+	public void setRoles(List<Privilege> userRoles)
+	{
+		this.userRoles = userRoles;
+	}
 	
-	public Set<Role> getRoles()
-	{
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles)
-	{
-		this.roles = roles;
-	}
-
 	@Override
 	public String toString()
 	{
-		return "User [firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone + ", email=" + email
-				+ ", password=" + password + "]";
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", password=" + password + ", userRoles=" + userRoles + "]";
+	}
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorites = new ArrayList<GrantedAuthority>();
+		userRoles.forEach(userRole -> authorites.add(new SimpleGrantedAuthority(userRole.getRole().getName())));
+		return authorites;
 	}
 
+	@Override
+	public String getUsername()
+	{
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired()
+	{
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked()
+	{
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired()
+	{
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled()
+	{
+		return true;
+	}
 }

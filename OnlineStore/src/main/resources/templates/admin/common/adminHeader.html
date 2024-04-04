@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Online Store</title>
+	<title>Admin Panel</title>
 
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/style.css" rel="stylesheet">
@@ -17,14 +17,15 @@
 	<div th:fragment="navbar">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand" th:href="@{/}">Admin Panel</a>
+				<a class="navbar-brand" th:href="@{/admin}">Admin Panel</a>
 				<div class="navbar-collapse" id="navbarNav">
 					<div class="navbar-nav">
-						<a class="nav-link" th:href="@{/}">Home</a>
-						<a class="nav-link" th:href="@{/userView}">Categories</a>
-						<a class="nav-link" th:href="@{/productView}">Search</a>
-						<a class="nav-link" th:href="@{/productAdd}">Account</a>
-						<a class="nav-link" th:href="@{/orderView}">Cart</a>
+						<a class="nav-link" th:href="@{/admin}">Home</a>
+						<a class="nav-link" th:href="@{/admin/userView}">View users</a>
+						<a class="nav-link" th:href="@{/admin/userAdd}">Add user</a>
+						<a class="nav-link" th:href="@{/admin/productView}">View products</a>
+						<a class="nav-link" th:href="@{/admin/productAdd}">Add product</a>
+						<a class="nav-link" th:href="@{/admin/orderView}">View orders</a>
 					</div>
 				</div>
 			</div>
