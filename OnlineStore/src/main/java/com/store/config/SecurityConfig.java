@@ -28,7 +28,7 @@ public class SecurityConfig {
 			"/login",
 			"/signup/**",
 			"/store",
-			"/profile/**"
+			"/account/**"
 	};
     
     @Bean
@@ -45,7 +45,7 @@ public class SecurityConfig {
 				.failureUrl("/login?error")
 				.loginPage("/login")
 				.loginProcessingUrl("/login")
-				.defaultSuccessUrl("/profile")
+				.defaultSuccessUrl("/account")
 				.permitAll()
 			)
 			.logout((logout) -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll());

@@ -7,39 +7,18 @@
 
 <div th:replace="~{common/header :: navbar}"></div>
 
-<div class="container page-content">
+<div class="container page-content mt-5">
     <div class="row">
-        <div class="col-md-4 col-lg-3">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h5 class="bold mb-0" th:text="${user.firstName} + ' ' + ${user.lastName}"></h5>
-                </div>
-                <div class="list-group list-group-flush">
-                    <a th:href="@{/profile}" class="list-group-item list-group-item-action">
-                        <i data-feather="user" class="mr-3"></i>
-                        Profile
-                    </a>
-                    <a th:href="@{/profile/orders}" class="list-group-item list-group-item-action">
-                        <i data-feather="shopping-bag" class="mr-3"></i>
-                        Orders
-                    </a>
-                    <a th:href="@{/profile/address}" class="list-group-item list-group-item-action">
-                        <i data-feather="map" class="mr-3"></i>
-                        Address
-                    </a>
-                    <a th:href="@{/logout}" class="list-group-item list-group-item-action text-danger">
-                        <i data-feather="log-out" class="mr-3"></i>
-                        Logout
-                    </a>
-                </div>
-            </div>
-        </div>
 
+        <div th:replace="~{/account/common/navigation.html :: navidation}"></div>
 
-        <div class="col mt-3 mt-md-0">
+        <div class="col mt-md-0">
             <div class="card">
                 <div class="card-body">
-                    <h3>My Addresses</h3>
+                    <h3>
+                        My Addresses
+                        <a class="btn btn-primary float-right" th:href="@{/account/addressAdd}">Add new address</a>
+                    </h3>
                     <hr>
                     <table class="table table-hover" data-addclass-on-xs="table-sm">
                         <thead class="thead-light">
@@ -55,7 +34,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="a : ${user.getAddress()}">
+                        <tr th:each="a : ${address}">
                             <td th:text="${a.id}"></td>
                             <td th:text="${a.label}"></td>
                             <td th:text="${a.country}"></td>
@@ -63,13 +42,13 @@
                             <td th:text="${a.street}"></td>
                             <td th:text="${a.zip}"></td>
                             <td>
-                                <form th:action="@{/admin/productEdit}" action="#" method="post" th:object="${p}">
+                                <form th:action="@{/addressEdit}" action="#" method="post" th:object="${a}">
                                     <input name="id" type=hidden th:value="${a.id}">
                                     <button class="btn btn-secondary" type="submit" name="editProduct">Edit</button>
                                 </form>
                             </td>
                             <td>
-                                <form th:action="@{/admin/productDelete}" action="#" method="post" th:object="${p}">
+                                <form th:action="@{/addressDelete}" action="#" method="post" th:object="${a}">
                                     <input name="id" type=hidden th:value="${a.id}">
                                     <button class="btn btn-danger" type="submit" name="deleteProduct">Delete</button>
                                 </form>
