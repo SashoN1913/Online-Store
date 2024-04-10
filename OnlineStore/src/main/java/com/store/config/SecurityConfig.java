@@ -28,6 +28,7 @@ public class SecurityConfig {
 			"/login",
 			"/signup/**",
 			"/store",
+			"/productDetails",
 			"/account/**"
 	};
     

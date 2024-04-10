@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.store.models.Address;
-import com.store.models.Product;
-import com.store.services.AddressService;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,9 +24,6 @@ public class UserController
 {
 	@Autowired
 	private UserService userService;
-
-	@Autowired
-	private AddressService addressService;
 
 	@GetMapping("/index")
 	public String home()
@@ -88,7 +83,7 @@ public class UserController
 		return "account/account.html";
 	}
 
-	@GetMapping("/account/orders")
+	@GetMapping("/account/order")
 	public String myOrders(Model model, Authentication authentication)
 	{
 		User user = (User) authentication.getPrincipal();
@@ -97,6 +92,13 @@ public class UserController
 		//model.addAttribute("orders", orders);
 		return "account/orders.html";
 	}
+
+//	@GetMapping("/account/orderDetails")
+//	public String orderDetail(@RequestParam("order") Long id, Model model) {
+//		Order order = orderService.findOrderWithDetails(id);
+//		model.addAttribute("order", order);
+//		return "orderDetails";
+//	}
 
 	@GetMapping("/account/address")
 	public String myAddress(Model model, Authentication authentication)
@@ -107,22 +109,19 @@ public class UserController
 	}
 
 	@GetMapping("/account/addressAdd")
-	public String add(Model model, Authentication authentication)
+	public String add(Model model)
 	{
-		Address address = new Address();
-		User user = (User) authentication.getPrincipal();
-		address.setUserId(user.getId());
-		System.out.println(address.getUserId());
-		model.addAttribute("address", address);
-		System.out.println(address.getUserId());
+		model.addAttribute("address", new Address());
 		return "/account/addressAdd.html";
 	}
 
 	@PostMapping("/account/addressAddUpdate")
 	public String addPost(@Validated Address address, BindingResult bindingResult, Model model, Authentication authentication)
 	{
-		addressService.addAddress(address);
 		User user = (User) authentication.getPrincipal();
+		user.addAddress(address);
+		userService.save(user);
+		user = userService.getUser(user.getId());
 		model.addAttribute("address", user.getAddress());
 		return "account/address.html";
 	}
@@ -142,12 +141,14 @@ public class UserController
 		return "admin/productView.html";
 	}
 
-	@PostMapping("/productDelete")
+	@PostMapping("/account/addressDelete")
 	public String delete(@Validated Address address, BindingResult bindingResult, Model model, Authentication authentication)
 	{
-		addressService.removeAddress(address.getId());
 		User user = (User) authentication.getPrincipal();
-		model.addAttribute("address", user.getAddress());
+		user.removeAddress(address.getId());
+		userService.save(user);
+		User user2 = userService.getUser(user.getId());
+		model.addAttribute("address", user2.getAddress());
 		return "account/address.html";
 	}
 }

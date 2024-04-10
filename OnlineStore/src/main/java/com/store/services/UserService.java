@@ -3,6 +3,7 @@ package com.store.services;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.store.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,10 +11,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.store.models.Privilege;
-import com.store.models.Role;
-import com.store.models.User;
-import com.store.models.UserDto;
 import com.store.repository.RoleRepository;
 import com.store.repository.UserRepository;
 
@@ -39,10 +36,16 @@ public class UserService implements UserDetailsService
 		return users.stream().map((user) -> mapToUserDto(user)).collect(Collectors.toList());
 	}
 	
-	public List<User> findAllUsers()
+	public List<User> getUsers()
 	{
 		List<User> users = userRepository.findAll();
 		return users;
+	}
+
+	public User getUser(Long id)
+	{
+		Optional<User> user = userRepository.findById(id);
+		return user.get();
 	}
 
 	private UserDto mapToUserDto(User user)
@@ -84,6 +87,10 @@ public class UserService implements UserDetailsService
 			user.setRoles(userRoles);
 			return userRepository.save(user);
 		}
+	}
+
+	public void save(User user) {
+		userRepository.save(user);
 	}
 
 	@Override

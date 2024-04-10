@@ -18,6 +18,6 @@ public class OnlineStoreAppStartup implements CommandLineRunner
 	public void run(String... args) throws Exception
 	{
 		userService.createUser("admin", "admin", "admin", "admin@admin.com", Arrays.asList("ROLE_USER", "ROLE_ADMIN"));
-		System.out.println(userService.findAllUsers());
+		System.out.println(userService.getUsers());
 	}
 }

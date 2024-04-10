@@ -110,6 +110,24 @@ public class User implements UserDetails
 		this.address = address;
 	}
 
+	public void addAddress(Address address)
+	{
+		address.setUserId(getId());
+		this.address.add(address);
+	}
+
+	public void removeAddress(Long id)
+	{
+		for (Address i : address)
+		{
+			if (i.getId() == id)
+			{
+				address.remove(i);
+				break;
+			}
+		}
+	}
+
 	@Override
 	public String toString()
 	{

@@ -42,13 +42,13 @@
                             <td th:text="${a.street}"></td>
                             <td th:text="${a.zip}"></td>
                             <td>
-                                <form th:action="@{/addressEdit}" action="#" method="post" th:object="${a}">
+                                <form th:action="@{/account/addressEdit}" action="#" method="post" th:object="${a}">
                                     <input name="id" type=hidden th:value="${a.id}">
                                     <button class="btn btn-secondary" type="submit" name="editProduct">Edit</button>
                                 </form>
                             </td>
                             <td>
-                                <form th:action="@{/addressDelete}" action="#" method="post" th:object="${a}">
+                                <form th:action="@{/account/addressDelete}" action="#" method="post" th:object="${a}">
                                     <input name="id" type=hidden th:value="${a.id}">
                                     <button class="btn btn-danger" type="submit" name="deleteProduct">Delete</button>
                                 </form>
