@@ -41,7 +41,7 @@ public class SecurityConfig {
 			.formLogin((form) -> form
 				.loginPage("/login")
 				.loginProcessingUrl("/login")
-				.defaultSuccessUrl("/users")
+				.defaultSuccessUrl("/admin/productAdd")
 				.permitAll()
 			)
 			.logout((logout) -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll());
