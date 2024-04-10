@@ -26,22 +26,26 @@ public class SecurityConfig {
 			"/",
 			"/index",
 			"/login",
-			"/register",
-			"/store"				
+			"/signup/**",
+			"/store",
+			"/profile/**"
 	};
     
     @Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
 	{
+		//noinspection removal
 		http
 			.authorizeHttpRequests((requests) -> requests
+					.shouldFilterAllDispatcherTypes(false)
 					.requestMatchers(PUBLIC_MATCHERS).permitAll()
 					.requestMatchers("/admin/**").permitAll()//hasRole("ADMIN")
 			)
 			.formLogin((form) -> form
+				.failureUrl("/login?error")
 				.loginPage("/login")
 				.loginProcessingUrl("/login")
-				.defaultSuccessUrl("/admin/productAdd")
+				.defaultSuccessUrl("/profile")
 				.permitAll()
 			)
 			.logout((logout) -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll());

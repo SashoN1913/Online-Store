@@ -20,7 +20,7 @@ public class ProductService
 		return productRepository.findAll();
 	}
 
-	public Product getProduct(int id)
+	public Product getProduct(Long id)
 	{
 		Optional<Product> p = productRepository.findById(id);
 		return p.get();
@@ -31,12 +31,12 @@ public class ProductService
 		productRepository.save(p);
 	}
 
-	public void removeProduct(int id)
+	public void removeProduct(Long id)
 	{
 		productRepository.deleteById(id);
 	}
 
-	public void updateProduct(int id, Product p)
+	public void updateProduct(Long id, Product p)
 	{
 		p.setId(id);
 		addProduct(p);

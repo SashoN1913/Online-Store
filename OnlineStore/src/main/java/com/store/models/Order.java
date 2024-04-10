@@ -16,7 +16,7 @@ public class Order
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 	private String status;
 	private Date date;
 	private Double total;
@@ -32,12 +32,12 @@ public class Order
 
 	}
 
-	public int getId()
+	public Long getId()
 	{
 		return id;
 	}
 
-	public void setId(int id)
+	public void setId(Long id)
 	{
 		this.id = id;
 	}

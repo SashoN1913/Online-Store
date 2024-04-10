@@ -32,6 +32,9 @@ public class User implements UserDetails
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Privilege> userRoles = new ArrayList<>();
 
+	@OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	private List<Address> address;
+
 	public User()
 	{
 		super();
@@ -96,14 +99,25 @@ public class User implements UserDetails
 	{
 		this.userRoles = userRoles;
 	}
-	
+
+	public List<Address> getAddress()
+	{
+		return address;
+	}
+
+	public void setAddress(List<Address> address)
+	{
+		this.address = address;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", password=" + password + ", userRoles=" + userRoles + "]";
+		return "User{" + "id=" + id + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\''
+				+ ", email='" + email + '\'' + ", password='" + password + '\'' + ", userRoles=" + userRoles
+				+ ", address=" + address + '}';
 	}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authorites = new ArrayList<GrantedAuthority>();

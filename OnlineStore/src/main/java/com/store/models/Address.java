@@ -11,6 +11,7 @@ public class Address
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	private String label;
 	private String country;
 	private String city;
 	private String street;
@@ -22,7 +23,7 @@ public class Address
 		
 	}
 
-	public Address(int id, String country, String city, String street, String zip, int userId)
+	public Address(int id, String label, String country, String city, String street, String zip, int userId)
 	{
 		super();
 		this.id = id;
@@ -41,6 +42,16 @@ public class Address
 	public void setId(int id)
 	{
 		this.id = id;
+	}
+
+	public String getLabel()
+	{
+		return label;
+	}
+
+	public void setLabel(String label)
+	{
+		this.label = label;
 	}
 
 	public String getCountry()
@@ -96,7 +107,7 @@ public class Address
 	@Override
 	public String toString()
 	{
-		return "Address [id=" + id + ", country=" + country + ", city=" + city + ", street=" + street + ", zip=" + zip
-				+ ", userId=" + userId + "]";
+		return "Address{" + "id=" + id + ", label='" + label + '\'' + ", country='" + country + '\'' + ", city='" + city
+				+ '\'' + ", street='" + street + '\'' + ", zip='" + zip + '\'' + ", userId=" + userId + '}';
 	}
 }

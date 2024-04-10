@@ -20,7 +20,7 @@ public class OrderService
 		return orderRepository.findAll();
 	}
 
-	public Order getOrder(int id)
+	public Order getOrder(Long id)
 	{
 		Optional<Order> order = orderRepository.findById(id);
 		return order.get();
@@ -31,12 +31,12 @@ public class OrderService
 		orderRepository.save(order);
 	}
 
-	public void removeOrder(int id)
+	public void removeOrder(Long id)
 	{
 		orderRepository.deleteById(id);
 	}
 
-	public void updateOrder(int id, Order order)
+	public void updateOrder(Long id, Order order)
 	{
 		order.setId(id);
 		addOrder(order);
