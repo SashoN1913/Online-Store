@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="layouts/defaultLayout" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{common/header :: header}"></head>
+
+<body>
+
+<div th:replace="~{common/header :: navbar}"></div>
+
+<div class="container page-content mt-5">
+    <div class="row">
+
+        <div th:replace="~{/account/common/navigation.html :: navidation}"></div>
+
+        <div class="col mt-md-0">
+            <div class="card">
+                <div class="card-body">
+                    <h3>
+                        My Addresses
+                        <a class="btn btn-primary float-right" th:href="@{/account/addressAdd}">Add new address</a>
+                    </h3>
+                    <hr>
+                    <table class="table table-hover" data-addclass-on-xs="table-sm">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>Id</th>
+                            <th>Label</th>
+                            <th>Country</th>
+                            <th>City</th>
+                            <th>Street</th>
+                            <th>Zip</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="a : ${address}">
+                            <td th:text="${a.id}"></td>
+                            <td th:text="${a.label}"></td>
+                            <td th:text="${a.country}"></td>
+                            <td th:text="${a.city}"></td>
+                            <td th:text="${a.street}"></td>
+                            <td th:text="${a.zip}"></td>
+                            <td>
+                                <form th:action="@{/account/addressEdit}" action="#" method="post" th:object="${a}">
+                                    <input name="id" type=hidden th:value="${a.id}">
+                                    <button class="btn btn-secondary" type="submit" name="editProduct">Edit</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form th:action="@{/account/addressDelete}" action="#" method="post" th:object="${a}">
+                                    <input name="id" type=hidden th:value="${a.id}">
+                                    <button class="btn btn-danger" type="submit" name="deleteProduct">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{common/header :: body-scripts}"></div>
+
+</body>
+
+</html>

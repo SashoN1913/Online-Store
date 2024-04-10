@@ -10,19 +10,20 @@ public class Address
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
+	private String label;
 	private String country;
 	private String city;
 	private String street;
 	private String zip;
-	private int userId;
+	private Long userId;
 	
 	public Address()
 	{
 		
 	}
 
-	public Address(int id, String country, String city, String street, String zip, int userId)
+	public Address(Long id, String label, String country, String city, String street, String zip, Long userId)
 	{
 		super();
 		this.id = id;
@@ -33,14 +34,24 @@ public class Address
 		this.userId = userId;
 	}
 
-	public int getId()
+	public Long getId()
 	{
 		return id;
 	}
 
-	public void setId(int id)
+	public void setId(Long id)
 	{
 		this.id = id;
+	}
+
+	public String getLabel()
+	{
+		return label;
+	}
+
+	public void setLabel(String label)
+	{
+		this.label = label;
 	}
 
 	public String getCountry()
@@ -83,12 +94,12 @@ public class Address
 		this.zip = zip;
 	}
 
-	public int getUserId()
+	public Long getUserId()
 	{
 		return userId;
 	}
 
-	public void setUserId(int userId)
+	public void setUserId(Long userId)
 	{
 		this.userId = userId;
 	}
@@ -96,7 +107,7 @@ public class Address
 	@Override
 	public String toString()
 	{
-		return "Address [id=" + id + ", country=" + country + ", city=" + city + ", street=" + street + ", zip=" + zip
-				+ ", userId=" + userId + "]";
+		return "Address{" + "id=" + id + ", label='" + label + '\'' + ", country='" + country + '\'' + ", city='" + city
+				+ '\'' + ", street='" + street + '\'' + ", zip='" + zip + '\'' + ", userId=" + userId + '}';
 	}
 }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="layouts/defaultLayout" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{common/header :: header}"></head>
+
+<body>
+
+<div th:replace="~{common/header :: navbar}"></div>
+
+<div class="container page-content mt-5">
+	<div class="row">
+
+		<div th:replace="~{/account/common/navigation.html :: navidation}"></div>
+
+		<div class="col mt-3 mt-md-0">
+			<div class="card">
+				<div class="card-body">
+					<h3>Add new address</h3>
+					<hr>
+					<form th:action="@{/account/addressAddUpdate}" action="#" method="post" th:object="${address}">
+						<div class="mb-3">
+							<label for="addressLabelInput" class="form-label">Address Label</label>
+							<input th:field="*{label}" type="text" class="form-control" id="addressLabelInput">
+						</div>
+
+						<div class="mb-3">
+							<label for="addressCountryInput" class="form-label">Country</label>
+							<input th:field="*{country}" type="text" class="form-control" id="addressCountryInput">
+						</div>
+
+						<div class="mb-3">
+							<label for="addressCityInput" class="form-label">City</label>
+							<input th:field="*{city}" type="text" class="form-control" id="addressCityInput">
+						</div>
+
+						<div class="mb-3">
+							<label for="addressStreetInput" class="form-label">Street</label>
+							<input th:field="*{street}" type="text" class="form-control" id="addressStreetInput">
+						</div>
+
+						<div class="mb-3">
+							<label for="addressZipInput" class="form-label">Zip</label>
+							<input th:field="*{zip}" type="text" class="form-control" id="addressZipInput">
+						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div th:replace="~{common/header :: body-scripts}"></div>
+
+</body>
+
+</html>

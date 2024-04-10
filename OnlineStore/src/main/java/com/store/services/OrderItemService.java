@@ -20,13 +20,13 @@ public class OrderItemService
 		return orderItemRepository.findAll();
 	}
 
-	public OrderItem getOrderItem(int id)
+	public OrderItem getOrderItem(Long id)
 	{
 		Optional<OrderItem> item = orderItemRepository.findById(id);
 		return item.get();
 	}
 
-	public List<OrderItem> getOrderItemsByOrderId(int id)
+	public List<OrderItem> getOrderItemsByOrderId(Long id)
 	{
 		List<OrderItem> items = orderItemRepository.findAll();
 		return items.stream().filter(OrderItem -> OrderItem.getOrder().getId() == id).toList();
@@ -37,12 +37,12 @@ public class OrderItemService
 		orderItemRepository.save(p);
 	}
 
-	public void removeOrder(int id)
+	public void removeOrder(Long id)
 	{
 		orderItemRepository.deleteById(id);
 	}
 
-	public void updateOrder(int id, OrderItem item)
+	public void updateOrder(Long id, OrderItem item)
 	{
 		item.setId(id);
 		addOrder(item);

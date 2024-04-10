@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="layouts/defaultLayout" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{common/header :: header}"></head>
+
+<body>
+
+<div th:replace="~{common/header :: navbar}"></div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">Invalid Email or Password</div>
+            </div>
+            <div th:if="${param.logout}">
+                <div class="alert alert-success"> You have been logged out.</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Login</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" role="form" th:action="@{/login}" class="form-horizontal">
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Email</label>
+                            <input type="text" id="username" name="username" class="form-control"
+                                   placeholder="Enter email address"/>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Password</label>
+                            <input type="password" id="password" name="password" class="form-control"
+                                   placeholder="Enter password"/>
+                        </div>
+                        <a th:href="@{/signup}">Forgotten password?</a>
+                        <br>
+                        <br>
+                        <div class="form-group mb-3">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                        <span>Not registered?
+                            <a th:href="@{/signup}">Register here</a>
+                        </span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{common/header :: body-scripts}"></div>
+
+</body>
+
+</html>

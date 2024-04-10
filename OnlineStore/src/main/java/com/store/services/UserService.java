@@ -1,8 +1,9 @@
 package com.store.services;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
+import com.store.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,89 +11,97 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.store.models.User;
-import com.store.models.UserDTO;
+import com.store.repository.RoleRepository;
 import com.store.repository.UserRepository;
+
 
 @Service
 public class UserService implements UserDetailsService
 {
 	@Autowired
 	private UserRepository userRepository;
-	
+	@Autowired
+	private RoleRepository roleRepository;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	public User findUserByEmail(String email)
+	{
+		return userRepository.findByEmail(email);
+	}
+
+	public List<UserDto> findAllUsersDto()
+	{
+		List<User> users = userRepository.findAll();
+		return users.stream().map((user) -> mapToUserDto(user)).collect(Collectors.toList());
+	}
 	
 	public List<User> getUsers()
 	{
-		return userRepository.findAll();
+		List<User> users = userRepository.findAll();
+		return users;
 	}
 
-	public User getUser(int id)
+	public User getUser(Long id)
 	{
 		Optional<User> user = userRepository.findById(id);
 		return user.get();
 	}
-	
-	public void addUser(User user)
+
+	private UserDto mapToUserDto(User user)
 	{
-		userRepository.save(user);
+		UserDto userDto = new UserDto();
+		userDto.setFirstName(user.getFirstName());
+		userDto.setLastName(user.getLastName());
+		userDto.setEmail(user.getEmail());
+		return userDto;
+	}
+
+	private Role checkRoleExist()
+	{
+		Role role = new Role();
+		role.setName("ROLE_ADMIN");
+		return roleRepository.save(role);
 	}
 	
-	public void saveUser(UserDTO userDto) {
-        User user = new User();
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
-        user.setEmail(userDto.getEmail());
-        // encrypt the password using spring security
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+	public User createUser(String firstName, String lastName, String password, String email, List<String> roles) {
+		User user = findUserByEmail(email);
+		if (user != null) {
+			return user;
+		} else {
+			user = new User();
+			user.setFirstName(firstName);
+			user.setLastName(lastName);
+			user.setPassword(passwordEncoder.encode(password));
+			user.setEmail(email);			
+			List<Privilege> userRoles = new ArrayList<>();
+			for (String rolename : roles) {
+				Role role = roleRepository.findByName(rolename);
+				if (role == null) {
+					role = new Role();
+					role.setName(rolename);
+					roleRepository.save(role);
+				}
+				userRoles.add(new Privilege(user, role));
+			}			
+			user.setRoles(userRoles);
+			return userRepository.save(user);
+		}
+	}
 
-        //Role role = roleRepository.findByName("ROLE_ADMIN");
-//        if(role == null){
-//            role = checkRoleExist();
-//        }
-        //user.setRoles(Arrays.asList(role));
-        System.out.println(user);
-        userRepository.save(user);
-    }
-	
-	public User findByUsername(String username)
-	{
-		return userRepository.findByEmail(username);
+	public void save(User user) {
+		userRepository.save(user);
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException
 	{
-		User user = userRepository.findByEmail(username);
-		System.out.println(user);
-		if (user == null) {
+		User user = userRepository.findByEmail(email);
+		
+		if (user == null)
+		{
 			throw new UsernameNotFoundException("Username not found");
 		}	
-		return (UserDetails) user;
+		return user;
 	}
-	
-
-//	
-//	@Override
-//	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException
-//	{
-//		
-//		 //User user = userRepo.findByEmail(email); if (user == null) { throw new
-//		 //UsernameNotFoundException("User not exists by email"); }
-//		 //Set<GrantedAuthority> authorities = user.getRoles().stream() .map((role) ->
-//		 //new SimpleGrantedAuthority(role.getName())).collect(Collectors.toSet());
-//		 // 
-//		 //return new org.springframework.security.core.userdetails.User(email,
-//		 //user.getPassword(), authorities);
-//		 
-//		User user = userRepo.findByEmail(email);
-//        if (user == null) {
-//            throw new UsernameNotFoundException(email);
-//        }
-//        return new CustomUserDetails(user);
-//	}
-//	
-	
-	
 }
