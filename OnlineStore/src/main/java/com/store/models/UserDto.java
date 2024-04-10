@@ -1,7 +1,5 @@
 package com.store.models;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
 
 public class UserDto
 {
