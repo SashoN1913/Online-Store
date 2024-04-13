@@ -1,7 +1,7 @@
 
-# Online Srore
+# Online Store
 
-#TODO: add description
+Online store with the possibility for discounts...
 
 ## Features
 
