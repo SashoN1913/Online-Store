@@ -1,7 +1,7 @@
 
 # Online Store
 
-Online store with the possibility for discounts...
+Online store with the possibility for discounts
 
 ## Features
 
