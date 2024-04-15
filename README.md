@@ -5,7 +5,7 @@ Online store with the possibility for discounts
 
 ## Features
 
-#TODO: add description 
+Features like shopping cart and many more.
 
 ## Prerequisites
 
