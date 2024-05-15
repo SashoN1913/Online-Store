@@ -5,26 +5,23 @@ Online store with the possibility for discounts
 
 ## Features
 
-1.User Authentication and Profiles:
--User registration and login functionality.
--User profile management (update profile info, view order history, etc.).
--Secure authentication mechanisms (e.g., password hashing, JWT).
--Admin Panel:
-2.Admin login with elevated privileges.
--Dashboard for managing products, orders, and users.
--CRUD operations for products (add, edit, delete).
--Ability to manage user accounts (view, block, delete).
-3.Items Database:
--Centralized database to store product information.
+- User Authentication and Profiles: 
+ -User registration and login functionality.
+    -User profile management (update profile info, view order history, etc.). 
+    -Secure authentication mechanisms (e.g., password hashing, JWT).
+- Admin login with elevated privileges. 
+    -Dashboard for managing products, orders, and users. 
+    -CRUD operations for products (add, edit, delete). 
+    -Ability to manage user accounts (view, block, delete). 
+- Items Database: 
+ -Centralized database to store product information. 
 -Search functionality with filters (by name, category, price range, etc.).
-4.Shopping Cart:
--Ability for users to add items to cart.
--View and edit cart contents (update quantities, remove items).
--Calculate subtotal, taxes, and total cost dynamically.
--Clear cart functionality.
-5.Checkout Process:
+-  Shopping Cart: 
+--Ability for users to add items to cart.
+-View and edit cart contents (update quantities, remove items). 
+-Calculate subtotal, taxes, and total cost dynamically. -Clear cart functionality.
+- Checkout Process:
 -Ability for customer to finish the process.
-
 ## Prerequisites
 
 Make sure you have the following prerequisites installed on your machine:
