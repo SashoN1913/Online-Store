@@ -76,13 +76,13 @@ This project currently has no license.
 All rights to the code, including but not limited to its use, modification, and distribution, are reserved by the project's creator or copyright holder.
 
 For inquiries regarding the use of this code, please contact : 
-Aleksander Nikolov  - aleknikolov@tu-sofia.bg
-Liubomir Rachev - lrachev@tu-sofia.bg
+- Aleksander Nikolov - aleknikolov@tu-sofia.bg 
+- Liubomir Rachev - lrachev@tu-sofia.bg
 
 ## Contact
 
-Aleksander Nikolov  - aleknikolov@tu-sofia.bg
-Liubomir Rachev - lrachev@tu-sofia.bg
-Rumen Kalchev - rkalchev@tu-sofia.bg
-Valeri Mirchevski - vmirchevski@tu-sofia.bg
-Ivan Andonov - iandonov@tu-sofia.bg
+- Aleksander Nikolov  - aleknikolov@tu-sofia.bg
+- Liubomir Rachev - lrachev@tu-sofia.bg
+- Rumen Kalchev - rkalchev@tu-sofia.bg
+- Valeri Mirchevski - vmirchevski@tu-sofia.bg
+- Ivan Andonov - iandonov@tu-sofia.bg
